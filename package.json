@@ -10,8 +10,7 @@
     "install:payload": "next-payload install",
     "build:next": "next build",
     "build": "yarn build:next",
-    "generate:types": "cross-env PAYLOAD_CONFIG_PATH=payload/payload.config.ts payload generate:types",
-    "generate:graphQLSchema": "PAYLOAD_CONFIG_PATH=payload/payload.config.ts payload generate:graphQLSchema"
+    "generate:types": "cross-env PAYLOAD_CONFIG_PATH=payload/payload.config.ts payload generate:types"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.245.0",
