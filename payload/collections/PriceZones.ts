@@ -17,11 +17,11 @@ export const PriceZones: CollectionConfig = {
   labels: {
     singular: {
       en: 'Price Zone',
-      no: 'Pris Sone',
+      no: 'Prissone',
     },
     plural: {
       en: 'Price Zones',
-      no: 'Pris Soner',
+      no: 'Prissoner',
     },
   },
   hooks: {
