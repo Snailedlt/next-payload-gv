@@ -1,17 +1,6 @@
-import payload from 'payload'
 import type { CollectionConfig } from 'payload/types'
-import { CollectionBeforeChangeHook } from 'payload/types'
+import { BeforeChangeHook } from './hooks/beforeChange'
 
-const BeforeChangeHook: CollectionBeforeChangeHook = async ({
-  data, // incoming data to update or create with
-}) => {
-  const kmRange = await payload.findByID({ collection: 'km-ranges', id: data.kmRange })
-  const priceDescription: string = await data.priceType === 'flat' ? 'nok' : 'nok/km' ?? 'fallback'
-  return {
-    ...data,
-    name: kmRange.name + ' - ' + data.price + ' ' + priceDescription
-  }
-}
 export const PriceZones: CollectionConfig = {
   slug: 'price-zones',
   labels: {

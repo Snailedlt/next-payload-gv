@@ -18,12 +18,23 @@ const groupCollections = (group: string | Record<string, string>, collections: C
     }
   })
 }
+const mockModulePath = path.resolve(__dirname, './emptyModuleMock.js')
 
 export default buildConfig({
   admin: {
     components: {
       beforeDashboard: [BeforeDashboard],
     },
+    webpack: config => ({
+      ...config,
+      resolve: {
+        ...config.resolve,
+        alias: {
+          ...config.resolve?.alias,
+          [path.resolve(__dirname, 'collections/PriceZones/hooks/beforeChange')]: mockModulePath,
+        },
+      },
+    }),
   },
   collections: [
     ...groupCollections({en: 'Delivery', no: 'Leveranse'}, [KmRanges, PriceZones, ProductionCenters]),
