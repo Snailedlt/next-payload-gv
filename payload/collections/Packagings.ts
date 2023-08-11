@@ -59,10 +59,6 @@ export const Packagings: CollectionConfig = {
   ],
   admin: {
     useAsTitle: 'name',
-    group: {
-      en: "Products",
-      no: "Produkter",
-    },
   },
   timestamps: true,
 }

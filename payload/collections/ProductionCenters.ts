@@ -49,10 +49,6 @@ export const ProductionCenters: CollectionConfig = {
   ],
   admin: {
     useAsTitle: 'name',
-    group: {
-      en: "Delivery",
-      no: "Leveranse",
-    },
   },
   timestamps: true,
 }

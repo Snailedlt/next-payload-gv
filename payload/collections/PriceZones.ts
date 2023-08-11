@@ -90,10 +90,6 @@ export const PriceZones: CollectionConfig = {
   ],
   admin: {
     useAsTitle: 'name',
-    group: {
-      en: "Delivery",
-      no: "Leveranse",
-    },
     defaultColumns: ['name', 'range', 'price', 'priceType'],
   },
   timestamps: true,

@@ -5,6 +5,19 @@ import BeforeDashboard  from "./components/BeforeDashboard";
 import { Packagings } from "./collections/Packagings";
 import { PriceZones } from "./collections/PriceZones";
 import { ProductionCenters } from "./collections/ProductionCenters";
+import { CollectionConfig } from "payload/types";
+
+const groupCollections = (group: string | Record<string, string>, collections: CollectionConfig[]): CollectionConfig[] => {
+  return collections.map(collection => {
+    return {
+      ...collection,
+      admin: {
+        ...collection.admin,
+        group,
+      },
+    }
+  })
+}
 
 export default buildConfig({
   admin: {
@@ -12,7 +25,10 @@ export default buildConfig({
       beforeDashboard: [BeforeDashboard],
     },
   },
-  collections: [KmRanges, Packagings, PriceZones, ProductionCenters],
+  collections: [
+    ...groupCollections({en: 'Delivery', no: 'Leveranse'}, [KmRanges, PriceZones, ProductionCenters]),
+    ...groupCollections({en: 'Products', no: 'Produkter'}, [Packagings]),
+  ],
   typescript: {
     outputFile: path.resolve(__dirname, "../payload-types.ts"),
   },

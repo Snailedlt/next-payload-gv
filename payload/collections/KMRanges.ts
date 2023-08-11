@@ -40,10 +40,6 @@ export const KmRanges: CollectionConfig = {
   ],
   admin: {
     useAsTitle: "name",
-    group: {
-      en: "Delivery",
-      no: "Leveranse",
-    },
   },
   timestamps: true,
 };
