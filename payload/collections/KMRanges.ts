@@ -1,4 +1,13 @@
-import type { CollectionConfig } from "payload/types";
+import type { CollectionBeforeChangeHook, CollectionConfig } from "payload/types";
+
+const BeforeChangeHook: CollectionBeforeChangeHook = async ({
+  data, // incoming data to update or create with
+}) => {
+  return {
+    ...data,
+    name: `${data.start}-${data.end} km`
+  }
+}
 
 export const KmRanges: CollectionConfig = {
   slug: "km-ranges",
@@ -12,6 +21,9 @@ export const KmRanges: CollectionConfig = {
       no: "Kilometerintervaller",
     }
   },
+  hooks: {
+    beforeChange: [BeforeChangeHook],
+  },
   fields: [
     {
       name: "name",
@@ -20,6 +32,11 @@ export const KmRanges: CollectionConfig = {
         no: "Navn",
       },
       type: "text",
+      admin: {
+        style: {
+          display: 'none',
+        },
+      },
     },
     {
       name: "start",
