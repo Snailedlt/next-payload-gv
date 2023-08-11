@@ -1,6 +1,6 @@
 import path from "path";
 import { buildConfig } from "payload/config";
-import { Ranges } from "./collections/Ranges";
+import { KmRanges } from "./collections/KmRanges";
 import BeforeDashboard  from "./components/BeforeDashboard";
 
 export default buildConfig({
@@ -9,10 +9,13 @@ export default buildConfig({
       beforeDashboard: [BeforeDashboard],
     },
   },
-  collections: [Ranges],
+  collections: [KmRanges],
   typescript: {
     outputFile: path.resolve(__dirname, "../payload-types.ts"),
   },
   cors: ["http://localhost:3000"],
   csrf: ["http://localhost:3000"],
+  i18n: {
+    fallbackLng: "no",
+  },
 });

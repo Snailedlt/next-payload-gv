@@ -8,12 +8,12 @@
 
 export interface Config {
   collections: {
-    ranges: Range;
+    'km-ranges': KmRange;
     users: User;
   };
   globals: {};
 }
-export interface Range {
+export interface KmRange {
   id: string;
   name?: string;
   start?: string;

@@ -9,7 +9,7 @@ const BeforeDashboard: React.FC = () => {
   return (
     <div className={baseClass}>
       <Banner className={`${baseClass}__banner`} type="success">
-        <h4>Welcome to Grønn Vekst's Admin Panel!</h4>
+        <h4>Grønn Vekst's Admin Panel!</h4>
       </Banner>
       </div>
   )
