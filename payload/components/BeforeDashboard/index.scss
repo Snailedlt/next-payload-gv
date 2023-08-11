@@ -1,0 +1,15 @@
+@import '~payload/scss';
+
+.dashboard .before-dashboard {
+	margin-bottom: base(1.5);
+
+	&__banner {
+		& h4 {
+			margin: 0;
+		}
+	}
+
+	& a:hover {
+		opacity: 0.85;
+	}
+}

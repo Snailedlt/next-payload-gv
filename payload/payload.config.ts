@@ -1,11 +1,14 @@
 import path from "path";
 import { buildConfig } from "payload/config";
 import { Ranges } from "./collections/Ranges";
+import BeforeDashboard  from "./components/BeforeDashboard";
 
 export default buildConfig({
-  // By default, Payload will boot up normally
-  // and you will be provided with a base `User` collection.
-  // But, here is where you define how you'd like Payload to work!
+  admin: {
+    components: {
+      beforeDashboard: [BeforeDashboard],
+    },
+  },
   collections: [Ranges],
   typescript: {
     outputFile: path.resolve(__dirname, "../payload-types.ts"),
