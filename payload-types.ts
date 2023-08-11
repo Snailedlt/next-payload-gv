@@ -9,6 +9,9 @@
 export interface Config {
   collections: {
     'km-ranges': KmRange;
+    packagings: Packaging;
+    'price-zones': PriceZone;
+    production_centers: ProductionCenter;
     users: User;
   };
   globals: {};
@@ -18,6 +21,31 @@ export interface KmRange {
   name?: string;
   start?: string;
   end?: string;
+  updatedAt: string;
+  createdAt: string;
+}
+export interface Packaging {
+  id: string;
+  name?: string;
+  'price-zones'?: string[] | PriceZone[];
+  unit_of_measure?: 'metric_tonnes' | 'amount';
+  updatedAt: string;
+  createdAt: string;
+}
+export interface PriceZone {
+  id: string;
+  name?: string;
+  'km-range': string | KmRange;
+  priceType?: 'fixed' | 'perkm';
+  price: string;
+  updatedAt: string;
+  createdAt: string;
+}
+export interface ProductionCenter {
+  id: string;
+  name: string;
+  address?: string;
+  'price-zones': string[] | PriceZone[];
   updatedAt: string;
   createdAt: string;
 }
