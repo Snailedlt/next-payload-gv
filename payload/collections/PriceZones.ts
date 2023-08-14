@@ -1,20 +1,14 @@
 import type { CollectionConfig } from 'payload/types'
 import { FieldHook } from 'payload/types';
 
-const getFullTitle: FieldHook = async ({ siblingData, data }) => {
+const getFullTitle: FieldHook = async ({ siblingData, data, req: { payload } }) => {
   if (data) {
     try {
-      const req = await fetch(`${process.env.PAYLOAD_PUBLIC_CMS_URL}/api/km-ranges/${data.kmRange}`,
-        {
-          method: 'GET',
-          credentials: "include",
-        }
-      )
-      const res = await req.json()
+      const kmRanges = await payload.findByID({ collection: 'km-ranges', id: data.kmRange });
 
-      if (res) {
+      if (kmRanges) {
         const priceDescription: string = data.priceType === 'fixed' ? 'nok' : 'nok/km'
-        siblingData.name =`${res.name} - ${data.price} ${priceDescription}`
+        siblingData.name =`${kmRanges.name} - ${data.price} ${priceDescription}`
       }
     } catch (err) {
       console.log(err)
