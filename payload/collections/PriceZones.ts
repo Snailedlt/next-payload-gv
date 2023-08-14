@@ -42,12 +42,6 @@ export const PriceZones: CollectionConfig = {
         },
       },
       hooks: {
-        beforeChange: [
-          ({ siblingData }) => {
-            // ensures data is not stored in DB
-            siblingData.name = undefined;
-          }
-        ],
         afterRead: [getFullTitle],
       }
     },

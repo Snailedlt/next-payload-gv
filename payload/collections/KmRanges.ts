@@ -26,12 +26,6 @@ export const KmRanges: CollectionConfig = {
         },
       },
       hooks: {
-        beforeChange: [
-          ({ siblingData }) => {
-            // ensures data is not stored in DB
-            siblingData.name = undefined
-          }
-        ],
         afterRead: [
           ({ data }) => {
             if (data) data.name = `${data.start} - ${data.end} km`
