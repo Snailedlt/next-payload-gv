@@ -1,5 +1,26 @@
 import type { CollectionConfig } from 'payload/types'
-import { BeforeChangeHook } from './hooks/beforeChange'
+import { FieldHook } from 'payload/types';
+
+const getFullTitle: FieldHook = async ({ siblingData, data }) => {
+  if (data) {
+    try {
+      const req = await fetch(`${process.env.PAYLOAD_PUBLIC_CMS_URL}/api/km-ranges/${data.kmRange}`,
+        {
+          method: 'GET',
+          credentials: "include",
+        }
+      )
+      const res = await req.json()
+
+      if (res) {
+        const priceDescription: string = data.priceType === 'fixed' ? 'nok' : 'nok/km'
+        siblingData.name =`${res.name} - ${data.price} ${priceDescription}`
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+};
 
 export const PriceZones: CollectionConfig = {
   slug: 'price-zones',
@@ -13,9 +34,6 @@ export const PriceZones: CollectionConfig = {
       no: 'Prissoner',
     },
   },
-  hooks: {
-    beforeChange: [BeforeChangeHook],
-  },
   fields: [
     {
       name: 'name',
@@ -25,11 +43,19 @@ export const PriceZones: CollectionConfig = {
       },
       type: 'text',
       admin: {
-        position: 'sidebar',
         style: {
           display: 'none',
+        },
       },
-    },
+      hooks: {
+        beforeChange: [
+          ({ siblingData }) => {
+            // ensures data is not stored in DB
+            siblingData.name = undefined;
+          }
+        ],
+        afterRead: [getFullTitle],
+      }
     },
     {
       name: 'kmRange',
